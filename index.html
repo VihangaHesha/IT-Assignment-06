@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BRIXO POS System - Customers</title>
+    <title>BRIXO POS System</title>
     <link rel="icon" href="/assets/icons/trowel-bricks-solid.svg" />
 
-    <!-- Bootstrap and font-awesome CDN links -->
+    <!-- Font Awesome, Bootstrap, Google Icon and Chart.js CDN -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -20,80 +20,62 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/newStyles.css" />
   </head>
 
   <body>
     <header>
       <nav
-        class="navbar navbar-expand-md navbar-light bg-light border-bottom border-success border-3 rounded-3 mb-4"
+        class="navbar navbar-expand-md navbar-light bg-light border-bottom border-success border-3 rounded-3 mb-4 position-fixed top-0 z-3 w-100"
       >
         <div class="container-fluid">
-          <a
-            class="navbar-brand fw-bold border-2 border-end border-success pe-3"
-            href="#"
-          >
-            <i class="fa-solid fa-trowel-bricks"></i>
-            BRIXO POS System
+          <a class="navbar-brand fw-bold text-dark border-2 logo" href="#">
+            <img
+              src="/assets/icons/trowel-bricks-solid(Black).svg"
+              alt="POS Logo"
+              class="d-inline-block align-text-top"
+            />
+            POS System
           </a>
           <button
-            class="navbar-toggler border-2 border-success"
+            id="burger-btn"
+            class="navbar-toggler border-0"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto w-100 ms-md-3">
-              <li class="nav-item">
-                <a class="nav-link active fw-semibold" href="#">
-                  <i class="bi bi-house"></i>
-                  Customers
-                </a>
+            <ul id="nav-bar" class="navbar-nav ms-5 w-100">
+              <li class="nav-item" onclick="showSection('home')">
+                <a class="nav-link fw-semibold text-success"> Home</a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link fw-semibold text-success"
-                  href="/pages/orders.html"
-                  ><i class="bi bi-cart"></i> Orders</a
-                >
+              <li class="nav-item" onclick="showSection('customers')">
+                <a class="nav-link fw-semibold text-success"> Customers</a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link fw-semibold text-success"
-                  href="/pages/items.html"
-                  ><i class="bi bi-box"></i> Items</a
-                >
+              <li class="nav-item" onclick="showSection('items')">
+                <a class="nav-link fw-semibold text-success"> Items </a>
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle fw-semibold text-success"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Others
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Supply</a></li>
-                  <li><a class="dropdown-item" href="#">Returns</a></li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Transactions</a>
-                  </li>
-                </ul>
+              <li class="nav-item" onclick="showSection('orders')">
+                <a class="nav-link fw-semibold text-success"> Orders </a>
               </li>
               <li class="nav-item ms-md-auto">
                 <div class="d-flex w-100 justify-content-center">
-                  <button class="btn fw-medium text-dark">
-                    <i class="fa-solid fa-user-plus"></i>
-                    Sign Up
-                  </button>
-                  <button class="btn fw-medium text-dark">
+                  <button
+                    id="logout-nav-btn"
+                    class="btn fw-medium text-dark"
+                    onclick="logout()"
+                  >
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Log Out
                   </button>
@@ -104,293 +86,1041 @@
         </div>
       </nav>
     </header>
-    <main>
-      <div class="container">
-        <div class="row label p-2 m-auto">
-          <div class="col-md-12">
-            <h1 class="fw-medium text-start my-auto">
-              <i class="fa-solid fa-users"></i>
-              Customers
-            </h1>
+    <main class="container-fluid">
+      <!-- Home Section -->
+      <section id="home" class="hide">
+        <div class="container-fluid px-lg-5 my-4">
+          <div class="row label p-2 m-auto">
+            <div class="col-lg-12">
+              <h1 class="fw-medium text-center my-auto">
+                Welcome to the BRIXO
+              </h1>
+            </div>
           </div>
-        </div>
-        <div class="row content p-1 m-auto">
-          <div class="col-md-12 p-3">
-            <div class="row m-auto">
-              <div class="col-md-6">
-                <h2
-                  class="fw-normal fs-5 ps-3 p-2 m-0 w-100 bg-success text-light"
-                >
-                  Customer Search
-                </h2>
-                <div class="search bg-light p-3">
-                  <form class="px-2" action="search">
-                    <div class="mb-3">
-                      <input
-                        type="text"
-                        class="form-control border-1 border-dark-subtle rounded-1 my-3 w-100"
-                        placeholder="Input Name/NIC/Tp Here"
-                        required
-                      />
-                      <div class="d-flex">
-                        <button class="btn btn-success rounded-1 w-auto px-4">
-                          Search
-                        </button>
-                        <select
-                          class="form-select ms-2 w-auto border-1 border-dark-subtle rounded-1"
+          <div class="row content p-1 m-auto">
+            <div class="col-lg-12 px-0 py-3 px-lg-3">
+              <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="card text-white bg-primary ps-2 mb-4">
+                    <div class="card-body d-flex align-items-center gap-4">
+                      <i class="fa-solid fa-users fs-1"></i>
+                      <div>
+                        <h5 class="card-title">Total Customers</h5>
+                        <p
+                          class="card-text fw-bold fs-4 ms-4"
+                          id="customerCount"
                         >
-                          <option>Name</option>
-                          <option>ID</option>
-                          <option>Phone</option>
-                        </select>
+                          0
+                        </p>
                       </div>
                     </div>
-                  </form>
+                  </div>
                 </div>
-              </div>
-              <div
-                class="col-md-6 pt-3 pt-md-0 d-flex justify-content-md-end justify-content-center"
-              >
-                <div class="w-75">
-                  <button
-                    class="btn btn-info px-4 rounded-1 w-100 mb-1"
-                    data-bs-toggle="modal"
-                    data-bs-target="#newCustomerModal"
-                  >
-                    New Customer
-                  </button>
-                  <button class="btn btn-warning px-4 rounded-1 w-100">
-                    View All Customers
-                  </button>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="card text-white bg-success ps-2 mb-4">
+                    <div class="card-body d-flex align-items-center gap-4">
+                      <i class="fa-solid fa-box fs-1"></i>
+                      <div>
+                        <h5 class="card-title">Total Items</h5>
+                        <p class="card-text fw-bold fs-4 ms-4" id="itemCount">
+                          0
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="card text-white bg-warning ps-2 mb-4">
+                    <div class="card-body d-flex align-items-center gap-4">
+                      <i class="fa-solid fa-cart-shopping fs-1"></i>
+                      <div>
+                        <h5 class="card-title">Total Orders</h5>
+                        <p class="card-text fw-bold fs-4 ms-4" id="orderCount">
+                          0
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="row button-set m-auto">
-              <div class="col-12 px-3">
+          </div>
+        </div>
+      </section>
+
+      <!-- Customers Section -->
+      <section id="customers" class="hide">
+        <div class="container-fluid px-lg-5 my-4">
+          <div class="row label p-2 m-auto">
+            <div class="col-lg-12">
+              <h1 class="fw-medium text-start my-auto">
+                <i class="fa-solid fa-users"></i>
+                Customers
+              </h1>
+            </div>
+          </div>
+          <div class="row content p-1 m-auto">
+            <div class="col-lg-12 px-0 py-3 px-lg-3">
+              <div class="row m-auto">
                 <div
-                  class="p-md-3 py-3 d-flex justify-content-md-start justify-content-center gap-1"
+                  class="col-md-6 border border-1 rounded-3 p-0 border-dark-subtle"
                 >
-                  <button class="btn btn-danger px-4 rounded-1">Delete</button>
-                  <button
-                    class="btn btn-info text-white px-4 rounded-1"
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateCustomerModal"
+                  <h5
+                    class="fw-normal ps-3 p-2 m-0 w-100 bg-success rounded-top-2 text-light"
                   >
-                    Update
-                  </button>
-                  <button class="btn btn-success text-white px-4 rounded-1">
-                    Clear
-                  </button>
+                    Customer Search
+                  </h5>
+                  <div class="search bg-light py-3 px-2 rounded-bottom-3">
+                    <form id="search-customer" class="px-2" action="search">
+                      <div class="mb-2">
+                        <input
+                          type="text"
+                          id="txt-search-valuec"
+                          class="form-control border-1 border-dark-subtle rounded-1 my-2"
+                          placeholder="Input ID/Name/Contact Here"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Please enter the valid ID, Name, or Contact Number
+                        </div>
+                        <div class="d-flex gap-1 mt-3">
+                          <button
+                            type="submit"
+                            class="btn btn-success px-3 rounded-1"
+                          >
+                            Search
+                          </button>
+                          <select
+                            id="searchCustomerBy"
+                            class="form-select w-auto rounded-1 ms-2"
+                          >
+                            <option>ID</option>
+                            <option>Name</option>
+                            <option>Contact</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-md-6 pt-4 d-flex justify-content-center">
+                  <div
+                    class="w-75 d-flex justify-content-center flex-column gap-2"
+                  >
+                    <button
+                      class="btn btn-info px-4 rounded-2 w-100 mb-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#newCustomerModal"
+                    >
+                      New Customer
+                    </button>
+                    <button class="btn btn-warning px-4 rounded-2 w-100">
+                      View All Customers
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row table-content m-auto">
-              <div class="col-12">
-                <div class="table-responsive text-center">
-                  <table class="table table-hover table-striped-columns">
-                    <thead>
-                      <tr>
-                        <th scope="col">Customer ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                      <tr>
-                        <th scope="row">C001</th>
-                        <td>Vihanga Heshan</td>
-                        <td>No.41,Tea breeze ,Adurathvila ,Poddala</td>
-                        <td>$55,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C002</th>
-                        <td>Kumara Silva</td>
-                        <td>No.2/13,Colombo road,Colombo</td>
-                        <td>$54,500</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C003</th>
-                        <td>Mahesh Perera</td>
-                        <td>No.5,Galle road,Colombo</td>
-                        <td>$32,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C004</th>
-                        <td>Rajitha De Silva</td>
-                        <td>No.12/32,Mount Lavinia,Colombo</td>
-                        <td>$62,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C005</th>
-                        <td>Sahan Rathnayake</td>
-                        <td>"Kamal",Kuruduwatte,Ginimallagaha</td>
-                        <td>$35,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C006</th>
-                        <td>Sithara De Silva</td>
-                        <td>No.21,Galle Rd,Waligama</td>
-                        <td>$10,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C007</th>
-                        <td>Rajesh Perera</td>
-                        <td>No.5,Kotahena,Colombo</td>
-                        <td>$75,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C008</th>
-                        <td>Nipun Kavindu</td>
-                        <td>"Sigithi",Adurathvila,Poddala</td>
-                        <td>$67,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C009</th>
-                        <td>Ruwan Chaminda</td>
-                        <td>No.32,Mabola,Wattala</td>
-                        <td>$80,000</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">C010</th>
-                        <td>Nimal Perera</td>
-                        <td>No.45,Mount Lavinia,Colombo</td>
-                        <td>$95,000</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div class="row button-set m-auto">
+                <div class="col-12 px-3">
+                  <div
+                    class="p-md-3 py-3 d-flex justify-content-md-start justify-content-center flex-wrap gap-1"
+                  >
+                    <button
+                      id="delete-customer-btn"
+                      class="btn btn-danger px-4 rounded-1"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      class="btn btn-info text-white px-4 rounded-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateCustomerModal"
+                    >
+                      Update
+                    </button>
+                    <button
+                      id="clear-customer-btn"
+                      class="btn btn-success text-white px-4 rounded-1"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row table-content mt-4 m-auto">
+                <div class="col-12">
+                  <div class="table-responsive text-center">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Customer ID</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Address</th>
+                          <th scope="col">Contact No</th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        id="customer-tbody"
+                        class="table-group-divider"
+                      ></tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ------------ New Customer Model ------------ -->
-      <div class="modal fade" id="newCustomerModal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content rounded-0">
-            <div class="modal-header bg-success text-white rounded-0">
-              <h5 class="modal-title">New Customer</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer ID:</label>
-                  <input
-                    type="text"
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    required
-                  />
-                </div>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer Name:</label>
-                  <input
-                    type="text"
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    required
-                  />
-                </div>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer Address:</label>
-                  <textarea
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    rows="3"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer Salary:</label>
-                  <input
-                    type="text"
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    required
-                  />
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer button-set">
-              <button type="button" class="btn btn-info rounded-1 text-light">
-                Save
-              </button>
-              <button type="button" class="btn btn-warning rounded-1">
-                Renew
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger rounded-1"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
+        <!-- ------------ New Customer Model ------------ -->
+        <div class="modal fade" id="newCustomerModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+              <div class="modal-header bg-success text-white rounded-0">
+                <h5 class="modal-title">New Customer</h5>
+                <button
+                  type="button"
+                  id="close-savec-icon"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="save-customer">
+                  <div class="mb-1">
+                    <label for="txt-save-cid" class="form-label fw-bold"
+                      >Customer ID :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-save-cid"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^C[0-9]{3,}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Customer ID is required [ Pattern : C00X ]
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-save-cname" class="form-label fw-bold"
+                      >Customer Name :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-save-cname"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^([A-Z]\.[A-Z]\. )?[A-Z][a-z]*( [A-Z][a-z]*)*$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Customer name is required and must follow the correct
+                      format
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-save-caddress" class="form-label fw-bold"
+                      >Customer Address :</label
+                    >
+                    <textarea
+                      id="txt-save-caddress"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      rows="3"
+                      pattern="^[A-Za-z0-9\s,./-]+(?:\s+[A-Za-z0-9\s,./-]+)*$"
+                    ></textarea>
+                    <div class="invalid-feedback error-bg">
+                      Customer address is required and must follow the correct
+                      format
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-save-cno" class="form-label fw-bold"
+                      >Customer Contact No :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-save-cno"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^[0-9]{10}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Enter a valid 10-digit contact number
+                    </div>
+                  </div>
+
+                  <div class="modal-footer button-set mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-info rounded-1 text-light"
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      id="close-savec-btn"
+                      class="btn btn-danger rounded-1"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- ------------ Update Customer Model ------------ -->
+        <div class="modal fade" id="updateCustomerModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+              <div class="modal-header bg-success text-white rounded-0">
+                <h5 class="modal-title">Update Customer</h5>
+                <button
+                  type="button"
+                  id="close-updatec-icon"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="update-customer">
+                  <div class="mb-1">
+                    <label for="txt-update-cid" class="form-label fw-bold"
+                      >Customer ID :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-update-cid"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^C[0-9]{3,}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Customer ID is [ Pattern : C00X ]
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-update-cname" class="form-label fw-bold"
+                      >Customer Name :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-update-cname"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^([A-Z]\.[A-Z]\. )?[A-Z][a-z]*( [A-Z][a-z]*)*$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Customer name is required and must follow the correct
+                      format
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-update-caddress" class="form-label fw-bold"
+                      >Customer Address :</label
+                    >
+                    <textarea
+                      id="txt-update-caddress"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      rows="3"
+                      pattern="^[A-Za-z0-9\s,./-]+(?:\s+[A-Za-z0-9\s,./-]+)*$"
+                    ></textarea>
+                    <div class="invalid-feedback error-bg">
+                      Customer address is required and must follow the correct
+                      format
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-update-cno" class="form-label fw-bold"
+                      >Customer Contact No :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-update-cno"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^[0-9]{10}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Enter a valid 10-digit contact number
+                    </div>
+                  </div>
+
+                  <div class="modal-footer button-set mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-info rounded-1 text-light"
+                    >
+                      Update
+                    </button>
+                    <button
+                      type="button"
+                      id="close-updatec-btn"
+                      class="btn btn-danger rounded-1"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Items Section -->
+      <section id="items" class="hide">
+        <div class="container-fluid px-lg-5 my-4">
+          <div class="row label p-2 m-auto">
+            <div class="col-lg-12">
+              <h1 class="fw-medium text-start my-auto">
+                <i class="fa-solid fa-cubes"></i>
+                Items
+              </h1>
+            </div>
+          </div>
+          <div class="row content p-1 m-auto">
+            <div class="col-lg-12 px-0 py-3 px-lg-3">
+              <div class="row m-auto">
+                <div class="col-lg-6 border rounded-3 p-0 border-dark-subtle">
+                  <h2
+                    class="fw-normal fs-5 ps-3 p-2 m-0 w-100 bg-success text-light rounded-top-2"
+                  >
+                    Item Search
+                  </h2>
+                  <div class="search bg-light rounded-bottom-3 px-2 py-4">
+                    <form id="search-item" class="px-2" action="search">
+                      <div class="mb-1">
+                        <input
+                          type="text"
+                          id="txt-search-valuei"
+                          class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                          placeholder="Input Code/Name Here"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Please enter a valid Code or Name
+                        </div>
+                        <div class="d-flex gap-1 mt-3">
+                          <button
+                            type="submit"
+                            class="btn btn-success px-3 rounded-1"
+                          >
+                            Search
+                          </button>
+                          <select
+                            id="search-item-by"
+                            class="form-select ms-2 w-auto border-1 border-dark-subtle rounded-1"
+                          >
+                            <option>Code</option>
+                            <option>Name</option>
+                          </select>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-md-6 pt-4 d-flex justify-content-center">
+                  <div
+                    class="w-75 d-flex justify-content-center flex-column gap-2"
+                  >
+                    <button
+                      class="btn btn-info px-4 rounded-1 w-100 mb-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#newItemModal"
+                    >
+                      New Item
+                    </button>
+                    <button
+                      id="load-all-item-btn"
+                      class="btn btn-warning px-4 rounded-1 w-100"
+                    >
+                      View All Items
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row button-set m-auto">
+                <div class="col-12 px-3">
+                  <div
+                    class="p-md-3 py-3 d-flex justify-content-md-start justify-content-center flex-wrap gap-1"
+                  >
+                    <button
+                      id="delete-item-btn"
+                      class="btn btn-danger px-4 rounded-1"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      class="btn btn-info text-white px-4 rounded-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateItemModal"
+                    >
+                      Update
+                    </button>
+                    <button
+                      id="clear-item-btn"
+                      class="btn btn-success text-white px-4 rounded-1"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row table-content mt-4 m-auto">
+                <div class="col-12">
+                  <div class="table-responsive text-center">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Item Code</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Unit Price</th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        id="item-tbody"
+                        class="table-group-divider"
+                      ></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------ New Item Model ------------ -->
+        <div class="modal fade" id="newItemModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+              <div class="modal-header bg-success text-white rounded-0">
+                <h5 class="modal-title">New Item</h5>
+                <button
+                  type="button"
+                  id="close-savei-icon"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="save-item">
+                  <div class="mb-1">
+                    <label for="txt-save-icode" class="form-label fw-bold"
+                      >Item Code :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-save-icode"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^I[0-9]{3,}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Item Code is required [ Pattern : I00X ]
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-save-iname" class="form-label fw-bold"
+                      >Item Name :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-save-iname"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^[a-zA-Z0-9\s\-\']{1,50}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Item name is required and must follow the correct format
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-save-iqty" class="form-label fw-bold"
+                      >Item Quantity :</label
+                    >
+                    <input
+                      type="number"
+                      id="txt-save-iqty"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^[1-9][0-9]*$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Item quantity is required and must be a positive integer
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-save-iprice" class="form-label fw-bold"
+                      >Item Unit Price :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-save-iprice"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^\d+(\.\d{1,2})?$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Enter a valid price (e.g., 10 or 10.99)
+                    </div>
+                  </div>
+
+                  <div class="modal-footer button-set mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-info rounded-1 text-light"
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      id="close-savei-btn"
+                      class="btn btn-danger rounded-1"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ------------ Update Item Model ------------ -->
+        <div class="modal fade" id="updateItemModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+              <div class="modal-header bg-success text-white rounded-0">
+                <h5 class="modal-title">Update Item</h5>
+                <button
+                  type="button"
+                  id="close-updatei-icon"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="update-item">
+                  <div class="mb-1">
+                    <label for="txt-update-icode" class="form-label fw-bold"
+                      >Item Code :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-update-icode"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^I[0-9]{3,}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Item Code is required [ Pattern : I00X ]
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-update-iname" class="form-label fw-bold"
+                      >Item Name :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-update-iname"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^[a-zA-Z0-9\s\-\']{1,50}$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Item name is required and must follow the correct format
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-update-iqty" class="form-label fw-bold"
+                      >Item Quantity :</label
+                    >
+                    <input
+                      type="number"
+                      id="txt-update-iqty"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^[1-9][0-9]*$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Item quantity is required and must be a positive integer
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="txt-update-iprice" class="form-label fw-bold"
+                      >Item Unit Price :</label
+                    >
+                    <input
+                      type="text"
+                      id="txt-update-iprice"
+                      class="form-control border-1 border-dark-subtle rounded-1 my-0"
+                      pattern="^\d+(\.\d{1,2})?$"
+                    />
+                    <div class="invalid-feedback error-bg">
+                      Enter a valid price (e.g., 10 or 10.99)
+                    </div>
+                  </div>
+
+                  <div class="modal-footer button-set mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-info rounded-1 text-light"
+                    >
+                      Update
+                    </button>
+                    <button
+                      type="button"
+                      id="close-updatei-btn"
+                      class="btn btn-danger rounded-1"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Orders Section -->
+      <section class="hide" id="orders">
+        <div class="container-fluid px-lg-5 my-5">
+          <div class="row g-4">
+            <!-- Invoice Details Section -->
+            <div class="col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white fs-5">
+                  Invoice Details
+                </div>
+                <div class="card-body">
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label">Order ID:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-order-id"
+                        pattern="^O[0-9]{3,}$"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid ID
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Date:</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="txt-order-date"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid Date
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label">Customer:</label>
+                      <select
+                        id="select-customer-id"
+                        class="form-select border-1 border-dark-subtle rounded-1"
+                      >
+                        <option value="">Select Customer</option>
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Customer ID:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-customer-id"
+                        pattern="^C[0-9]{3,}$"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid Customer ID
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label">Name:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-customer-name"
+                        readonly
+                      />
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Contact:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="txt-customer-cno"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Address:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="txt-customer-address"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item Select Section -->
+            <div class="col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-header bg-success text-white fs-5">
+                  Item Select
+                </div>
+                <div class="card-body d-flex flex-column">
+                  <div class="item-select-content">
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label">Item:</label>
+                        <select class="form-select" id="select-item-code">
+                          <option value="">Select Item</option>
+                        </select>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">Item Code:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-code"
+                          pattern="^I[0-9]{3,}$"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Enter a valid Item Code
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label">Item Name:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-name"
+                          readonly
+                        />
+                      </div>
+                      <div class="col-3">
+                        <label class="form-label">Price:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-price"
+                          readonly
+                        />
+                      </div>
+                      <div class="col-3">
+                        <label class="form-label">Qty/Unit:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-item-qty"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Order Quantity:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="txt-order-qty"
+                        pattern="^[1-9][0-9]*$"
+                      />
+                      <div class="invalid-feedback error-bg">
+                        Enter a valid Quantity
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button
+                      type="button"
+                      class="btn btn-danger w-auto mt-auto"
+                      id="add-item-btn"
+                    >
+                      Add Item
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total Details Section -->
+            <div class="col-lg-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                  <div class="bg-light p-4 rounded mb-3">
+                    <h5 class="mb-2 text-primary fs-4 mb-3" id="lbl-total">
+                      Total: Rs. 0/=
+                    </h5>
+                    <h5 class="mb-0 text-danger fs-4" id="lbl-subtotal">
+                      Sub Total: Rs. 0/=
+                    </h5>
+                  </div>
+                  <div class="bg-light p-3 rounded mt-auto">
+                    <div class="row mb-3">
+                      <div class="col-6">
+                        <label class="form-label">Cash:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-order-cash"
+                          pattern="^\d+(\.\d{1,2})?$"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Enter a valid Amount
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">Discount:</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="txt-order-discount"
+                          pattern="^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$"
+                        />
+                        <div class="invalid-feedback error-bg">
+                          Enter a valid Discount
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <label class="form-label">Balance:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txt-order-balance"
+                          readonly
+                        />
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <button
+                        class="btn btn-success w-auto"
+                        id="order-purchase-btn"
+                      >
+                        Purchase
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table Section -->
+          <div class="container-fluid mt-5 item-table">
+            <table class="table table-hover mb-0 text-center table-responsive">
+              <thead>
+                <tr>
+                  <th scope="col">Item Code</th>
+                  <th scope="col">Item Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody
+                class="table-group-divider"
+                id="order-detail-tbody"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Success Toast -->
+      <div
+        id="success-toast"
+        class="toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Success! Message.</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
       </div>
 
-      <!-- ------------ Update Customer Model ------------ -->
-      <div class="modal fade" id="updateCustomerModal" tabindex="-1">
+      <!-- Error Toast -->
+      <div
+        id="error-toast"
+        class="toast align-items-center text-white bg-danger border-0 position-fixed bottom-0 end-0 m-3"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Error! Message.</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Confirm Delete Modal -->
+      <div
+        class="modal fade"
+        id="confirm-delete-model"
+        tabindex="-1"
+        aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog">
-          <div class="modal-content rounded-0">
-            <div class="modal-header bg-success text-white rounded-0">
-              <h5 class="modal-title">Update Customer</h5>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmDeleteModalLabel">
+                Confirm Deletion
+              </h5>
               <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
+                aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <form>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer ID:</label>
-                  <input
-                    type="text"
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    required
-                  />
-                </div>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer Name:</label>
-                  <input
-                    type="text"
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    required
-                  />
-                </div>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer Address:</label>
-                  <textarea
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    rows="3"
-                    required
-                  ></textarea>
-                </div>
-                <div class="mb-1">
-                  <label class="form-label fw-bold">Customer Salary:</label>
-                  <input
-                    type="text"
-                    class="form-control border-1 border-dark-subtle rounded-1 my-0"
-                    required
-                  />
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer button-set">
-              <button type="button" class="btn btn-info rounded-1 text-light">
-                Update
+            <div class="modal-body">Message</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
               </button>
               <button
                 type="button"
-                class="btn btn-danger rounded-1"
-                data-bs-dismiss="modal"
+                class="btn btn-danger"
+                id="confirm-delete-btn"
               >
-                Close
+                Delete
               </button>
             </div>
           </div>
@@ -399,12 +1129,53 @@
     </main>
 
     <footer>
-      <div
-        class="text-center border-2 border-top border-success rounded-3 py-3"
-      >
-        <p class="m-0">
-          ©Copyright 2024 BRIXO POS-System. All Rights Reserved.
-        </p>
+      <div class="container-fluid bg-secondary-subtle pt-4">
+        <div class="container">
+          <div class="row justify-content-between flex-wrap gap-2">
+            <!-- Logo and Description Section -->
+            <div
+              class="col-lg-5 col-md-4 ms-lg-5 d-flex flex-column justify-content-center align-items-start"
+            >
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="/assets/icons/trowel-bricks-solid(Black).svg"
+                  alt="POS Logo"
+                  width="40"
+                  class="me-2"
+                />
+                <h5 class="logo mb-0">BRIXO</h5>
+              </div>
+              <p class="text-muted small">
+                Your complete point of sale solution for modern business
+                management.
+              </p>
+            </div>
+
+            <!-- Social Media Section -->
+            <div
+              class="col-lg-5 col-md-4 mb-sm-2 d-flex flex-column justify-content-center align-items-center"
+            >
+              <h6 class="fw-bold text-success">Connect With Us</h6>
+              <div class="d-flex gap-3">
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="#" class="text-success fs-4">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Copyright Section -->
+          <div class="border-top border-success py-3 mt-3">
+            <p class="text-center text-muted small mb-0">
+              ©Copyright 2024 POS-System. All Rights Reserved.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
 
@@ -413,5 +1184,12 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="/util/ScriptLoader.js"></script>
+    <script src="/util/SalesChart.js"></script>
   </body>
 </html>
